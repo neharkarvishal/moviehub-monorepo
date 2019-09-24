@@ -11,6 +11,6 @@
   "author": "Vishal <neharkar.vishal@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "prettier": "latest"
+    "prettier": "^1.18.2"
   }
 }
