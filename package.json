@@ -1,0 +1,12 @@
+{
+  "name": "moviehub",
+  "version": "0.1.0",
+  "description": "Moviehub - digital guide, movie db, everything entertainment. ",
+  "main": "index.js",
+  "author": "neharkar.vishal@gmail.com",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^3.16.4"
+  }
+}
