@@ -6,6 +6,9 @@
   "author": "neharkar.vishal@gmail.com",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "lerna": "^3.16.4"
   }
