@@ -2,13 +2,21 @@
   "name": "moviehub",
   "version": "0.1.0",
   "description": "Moviehub - digital guide, movie db, everything entertainment. ",
-  "main": "index.js",
   "author": "neharkar.vishal@gmail.com",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "scripts": {
+    "postinstall": "npm run hoist",
+    "hoist": "lerna bootstrap --no-ci --hoist",
+
+    "clean": "npm run clean:artifacts && npm run clean:packages && npm run clean:root",
+    "clean:artifacts": "lerna run clean --stream --parallel",
+    "clean:packages": "lerna clean --yes",
+    "clean:root": "rimraf node_modules",
+
+    "build": "lerna run build --stream --parallel",
+    "bootstrap": "lerna bootstrap --hoist"
+  },
   "devDependencies": {
     "lerna": "^3.16.4"
   }

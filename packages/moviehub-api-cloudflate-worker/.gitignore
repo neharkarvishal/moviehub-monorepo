@@ -7,3 +7,10 @@ wasm-pack.log
 worker/
 node_modules/
 .cargo-ok
+.env
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+wrangler.toml

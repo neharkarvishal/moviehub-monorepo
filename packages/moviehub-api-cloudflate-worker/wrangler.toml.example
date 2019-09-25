@@ -1,0 +1,7 @@
+account_id = "yourAccountId"
+name = "moviehub-api-cloudflate-worker"
+type = "webpack"
+route = "yourDomain/*"
+workers_dev = true
+zone_id = "yourZoneId"
+private = false
