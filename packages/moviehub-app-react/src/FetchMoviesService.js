@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 
 const api_url = `https://movie-api-app.jgb.solutions`;
 
@@ -8,7 +8,7 @@ function FetchMoviesService() {
   const [canLoadMoreFeed, setCanLoadMoreFeed] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKey, setSearchKey] = useState(undefined);
-  const [lastSearchedKey, updateLastSearchedKey] = useState('');
+  const [lastSearchedKey, updateLastSearchedKey] = useState("");
 
   const fetchMoviesFeed = async () => {
     setIsFetchingData(true);
@@ -27,24 +27,23 @@ function FetchMoviesService() {
       setIsFetchingData(false);
 
       if (searchKey === lastSearchedKey) {
-        setMoviesCollection(
-          prevMoviesCollection => [
-            ...prevMoviesCollection,
-            ...fetchedMoviesCollection]
-        );
+        setMoviesCollection(prevMoviesCollection => [
+          ...prevMoviesCollection,
+          ...fetchedMoviesCollection
+        ]);
       }
       else {
         setMoviesCollection([...fetchedMoviesCollection]);
         updateLastSearchedKey(searchKey);
       }
 
-      if (totalResults - (currentPage * 10) > 0) {
+      if (totalResults - currentPage * 10 > 0) {
         setCanLoadMoreFeed(true);
-        setCurrentPage(prevPage => ++prevPage)
+        setCurrentPage(prevPage => ++prevPage);
       }
       else {
         setCanLoadMoreFeed(false);
-        setCurrentPage(1)
+        setCurrentPage(1);
       }
     }
     catch (error) {
@@ -54,10 +53,8 @@ function FetchMoviesService() {
   };
 
   useEffect(() => {
-      if (searchKey)
-        fetchMoviesFeed();
-    }, [searchKey]
-  );
+    if (searchKey) fetchMoviesFeed();
+  }, [searchKey]);
 
   return [
     moviesCollection,
@@ -66,7 +63,7 @@ function FetchMoviesService() {
     canLoadMoreFeed,
     fetchMoviesFeed,
     lastSearchedKey,
-    setMoviesCollection,
+    setMoviesCollection
   ];
 }
 

@@ -1,7 +1,7 @@
-import React from 'react';
-import FetchMoviesService from './FetchMoviesService';
-import Header from './Header';
-import logo from './logo.svg';
+import React from "react";
+import FetchMoviesService from "./FetchMoviesService";
+import Header from "./Header";
+import logo from "./logo.svg";
 
 let debounceSearch;
 
@@ -13,7 +13,7 @@ function MoviesRepository() {
     canLoadMoreFeed,
     fetchMoviesFeed,
     lastSearchedKey,
-    setMoviesCollection,
+    setMoviesCollection
   ] = FetchMoviesService();
 
   const search = event => {
@@ -30,10 +30,18 @@ function MoviesRepository() {
   };
   return (
     <div>
-      <Header
-        logo={logo}
-        text={'Moviehub'}
-      />
+      <Header logo={logo} text={"Moviehub"} />
+      <form>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search any movie, series or TV Shows"
+            onChange={search}
+          />
+        </div>
+      </form>
+      <br />
     </div>
   );
 }
