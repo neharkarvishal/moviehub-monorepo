@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const api_url = `https://movie-api-app.jgb.solutions`;
 
@@ -32,19 +32,22 @@ function FetchMoviesService() {
             ...prevMoviesCollection,
             ...fetchedMoviesCollection]
         );
-      } else {
+      }
+      else {
         setMoviesCollection([...fetchedMoviesCollection]);
         updateLastSearchedKey(searchKey);
       }
 
-      if (totalResults - (page * 10) > 0) {
+      if (totalResults - (currentPage * 10) > 0) {
         setCanLoadMoreFeed(true);
         setCurrentPage(prevPage => ++prevPage)
-      } else {
+      }
+      else {
         setCanLoadMoreFeed(false);
         setCurrentPage(1)
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error(error);
       setIsFetchingData(false);
     }
@@ -53,7 +56,7 @@ function FetchMoviesService() {
   useEffect(() => {
       if (searchKey)
         fetchMoviesFeed();
-    }, [searchKay]
+    }, [searchKey]
   );
 
   return [
@@ -62,8 +65,8 @@ function FetchMoviesService() {
     isFetchingData,
     canLoadMoreFeed,
     fetchMoviesFeed,
-    lastSearchTerm,
-    setMovies,
+    lastSearchedKey,
+    setMoviesCollection,
   ];
 }
 
