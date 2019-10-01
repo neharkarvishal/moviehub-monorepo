@@ -22,31 +22,28 @@ function FetchMoviesService() {
         `${api_url}/search/${searchKey}/?page=${currentPage}`
       );
       const responseBody = await response.json();
-      const fetchedMoviesCollection = responseBody.Search;
+      const moviesCollection = responseBody.Search;
       const totalResults = parseInt(responseBody.totalResults);
       setIsFetchingData(false);
 
       if (searchKey === lastSearchedKey) {
         setMoviesCollection(prevMoviesCollection => [
           ...prevMoviesCollection,
-          ...fetchedMoviesCollection
+          ...Array.from(moviesCollection)
         ]);
-      }
-      else {
-        setMoviesCollection([...fetchedMoviesCollection]);
+      } else {
+        setMoviesCollection([...Array.from(moviesCollection)]);
         updateLastSearchedKey(searchKey);
       }
 
       if (totalResults - currentPage * 10 > 0) {
         setCanLoadMoreFeed(true);
-        setCurrentPage(prevPage => ++prevPage);
-      }
-      else {
+        setCurrentPage(prevPage => prevPage + 1);
+      } else {
         setCanLoadMoreFeed(false);
         setCurrentPage(1);
       }
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
       setIsFetchingData(false);
     }

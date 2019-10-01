@@ -1,8 +1,11 @@
 import React from "react";
 import FetchMoviesService from "./FetchMoviesService";
-import { get } from 'lodash';
+import { get } from "lodash";
 import Header from "./Header";
+import Button from "./Button";
+import Card from "./Card";
 import logo from "./logo.svg";
+import Form from "./Form";
 
 let debounceSearch;
 
@@ -19,7 +22,8 @@ function MoviesRepository() {
 
   const search = event => {
     const searchKey = event.target.value.trim();
-    if (searchKey > 2) {
+
+    if (searchKey.length > 2) {
       clearTimeout(debounceSearch);
       debounceSearch = setTimeout(() => {
         setSearchKey(searchKey);
@@ -29,19 +33,14 @@ function MoviesRepository() {
     }
   };
   return (
-    <div>
+    <div className="col-sm-8 offset-sm-2">
       <Header logo={logo} text={"Moviehub"} />
-      <form>
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search any movie, series or TV Shows"
-            onChange={search}
-          />
-        </div>
-      </form>
+      <Form
+        placeholder={"Search any movie, series or TV Shows"}
+        onChange={() => search}
+      />
       <br />
+
       {isFetchingData && <h2>Loading...</h2>}
       <div className="row">
         {moviesCollection.length ? (
@@ -56,19 +55,13 @@ function MoviesRepository() {
             const year = get(movie, "Year", `undefined`);
 
             return (
-              <div key={movieId} className="col-sm-6 mb-3">
-                <div className="row">
-                  <div className="col-7">
-                    <img src={poster} alt={title} className="img-fluid" />
-                  </div>
-                  <div className="col-5">
-                    <h3 className="movie-title">{title}</h3>
-                    <p>
-                      Type: {type}.<br /> Year: {year}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <Card
+                key={movieId}
+                poster={poster}
+                title={title}
+                type={type}
+                year={year}
+              />
             );
           })
         ) : lastSearchedKey.length > 2 ? (
@@ -77,13 +70,9 @@ function MoviesRepository() {
           </div>
         ) : null}
       </div>
+
       {!!moviesCollection.length && canLoadMoreFeed && (
-        <button
-          className="btn btn-primary btn-large btn-block"
-          onClick={fetchMoviesFeed}
-        >
-          Load More
-        </button>
+        <Button onClick={() => fetchMoviesFeed} text={"Load More"} />
       )}
       <br />
       <br />

@@ -4,8 +4,10 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <MoviesRepository />
+    <div className="container">
+      <div className="row">
+        <MoviesRepository />
+      </div>
     </div>
   );
 }
