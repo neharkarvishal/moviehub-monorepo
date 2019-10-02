@@ -1,12 +1,13 @@
 import React from "react";
 
 function Button(props) {
+  const { text, onClick } = props;
   return (
     <button
       className="btn btn-primary btn-large btn-block"
-      onClick={props.onClick}
+      onClick={onClick}
     >
-      {props.text}
+      {text}
     </button>
   );
 }

@@ -1,11 +1,14 @@
 import React from "react";
-import FetchMoviesService from "./FetchMoviesService";
 import { get } from "lodash";
-import Header from "./Header";
-import Button from "./Button";
-import Card from "./Card";
-import logo from "./logo.svg";
-import Form from "./Form";
+import logo from "../logo.svg";
+
+import Card from "../components/Card";
+import Form from "../components/Form";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import NoMoviesFound from "../components/NoMoviesFound"
+
+import FetchMoviesService from "../services/FetchMoviesService";
 
 let debounceSearch;
 
@@ -20,7 +23,7 @@ function MoviesRepository() {
     setMoviesCollection
   ] = FetchMoviesService();
 
-  const search = event => {
+  const search = (event) => {
     const searchKey = event.target.value.trim();
 
     if (searchKey.length > 2) {
@@ -37,7 +40,7 @@ function MoviesRepository() {
       <Header logo={logo} text={"Moviehub"} />
       <Form
         placeholder={"Search any movie, series or TV Shows"}
-        onChange={() => search}
+        onChange={search}
       />
       <br />
 
@@ -65,14 +68,12 @@ function MoviesRepository() {
             );
           })
         ) : lastSearchedKey.length > 2 ? (
-          <div className="col-12">
-            <h2>No Movies Found</h2>
-          </div>
+          <NoMoviesFound />
         ) : null}
       </div>
 
       {!!moviesCollection.length && canLoadMoreFeed && (
-        <Button onClick={() => fetchMoviesFeed} text={"Load More"} />
+        <Button  text={"Load More"} onClick={fetchMoviesFeed} />
       )}
       <br />
       <br />

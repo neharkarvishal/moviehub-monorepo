@@ -1,6 +1,6 @@
 import React from "react";
-import MoviesRepository from "./MoviesRepository";
 import "./App.css";
+import MoviesRepository from "./repositories/MoviesRepository";
 
 function App() {
   return (
